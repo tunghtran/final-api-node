@@ -1,5 +1,4 @@
 var router = require('express').Router();
-var logger = require('../../util/logger');
 
 // setup boilerplate route jsut to satisfy a request
 // for building
@@ -9,7 +8,7 @@ var logger = require('../../util/logger');
 //Then use route() to remove redundant code.
 router.route('/')
   .get(function(req, res){
-    logger.log('Hey from user!!');
+    console.log('Hey from user!!');
     res.send({ok: true});
   });
 

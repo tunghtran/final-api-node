@@ -12,10 +12,13 @@ var PostSchema = new Schema({
     type: String,
     required: true
   },
-  // array of ids from the users
-  author: [{type: Schema.Types.ObjectId, ref: 'user'}],
+  // reference to the user who created this post
+  author: 
+        {type: Schema.Types.ObjectId,
+         ref: 'user',
+         required:true
+        }
 
-  categories: [{type: Schema.Types.ObjectId, ref: 'category'}]
 });
 
 module.exports = mongoose.model('post', PostSchema);

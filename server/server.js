@@ -17,7 +17,7 @@ mongoose.connect(config.db.url);
 //things could easily get out of control 
 //if we keep adding code to a single 
 //JavaScript file (server.js).
-// Let’s move the roues-related code 
+// So  move the routes-related code 
 //into  api module .
 app.use('/api/', api);
 

@@ -8,11 +8,7 @@
 var port         = process.env.PORT || 8080; 
 var app = require('./server/server');
 
-//logger is the wrapper around console.log that adds color
-// You can conditionally turn it off
-var logger = require('./server/util/logger');
-
 app.listen(port);
-logger.log('listening on ' + port);
+console.log('listening on ' + port);
 
 
