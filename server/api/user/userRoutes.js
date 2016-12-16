@@ -1,5 +1,6 @@
 var router = require('express').Router();
-
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 // setup boilerplate route jsut to satisfy a request
 // for building
 
@@ -8,8 +9,31 @@ var router = require('express').Router();
 //Then use route() to remove redundant code.
 router.route('/')
   .get(function(req, res){
-    res.json({'message':'Hey from user!!'});
+    User.find({}, function(err, users){
+      if(err) throw err;
+      console.log(users);
+    });
     res.send({ok: true});
+  });
+
+router.route('/')
+  .post(function(req, res){
+    if(!req.body.username || !req.body.address){
+        res.json({success: false, msg: 'Please add username and address'});
+    }
+    else{
+    	var newUser = new User({
+            username: req.body.username,
+	    address: req.body.address
+	});
+
+	newUser.save(function(err){
+	    if (err) {
+    		return res.json({success: false, msg: 'Username already exists.'});
+  	    }
+      	    res.json({success: true, msg: 'Successful created new user.'});
+	})
+    }
   });
 
 module.exports = router;

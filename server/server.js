@@ -16,6 +16,9 @@ mongoose.connect(config.db.url, function(err, res){
 
 });
 
+require('./api/post');
+require('./api/user');
+
 //Set - up global middleware
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
