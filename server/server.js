@@ -6,12 +6,25 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 // connect to mongoDB database 
-mongoose.connect(config.db.url);
-//Set - up global middleware
- app.use(morgan('dev'));
- app.use(bodyParser.urlencoded({ extended: true }));
- app.use(bodyParser.json());
+mongoose.connect(config.db.url, function(err, res){
+    if(err){
+        console.log("Error connecting to db: " + config.db.url);
+    }	
+    else{
+        console.log("Successfully connected to db: " + config.db.url);
+    }
 
+});
+
+//Set - up global middleware
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+// Error handling middleware
+app.use(function(err, req, res, next){
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
 
 //In a large application, 
 //things could easily get out of control 
